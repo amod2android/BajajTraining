@@ -1,0 +1,10 @@
+resetting commits
+
+--git reset --soft HEAD~1
+just remove the file from commit but keep on statging
+
+--git reset --hard HEAD~1
+ remove the file from commit and statging also
+
+--git reset HEAD~1 
+ remove the file from commit and statging also but file is there
