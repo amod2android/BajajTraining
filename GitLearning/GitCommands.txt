@@ -1,4 +1,64 @@
+to create / initialize a empty repo
+-- git init
+
+to connect local repo to remote repo
+-- git remote add origin <url>
+
+to check the difference between repo and folder
+-- git status
+
+to track or add files to staging
+-- git add <file>
+eg. git add git_commands.txt
+
+to track or add all files to staging
+-- git add .
+
+to commit changes
+-- git commit -m "Commit Message"
+
+to check commits log
+-- git log
+
+default branch is master if you want it to be main
+-- git branch -M main
+
+to unstage file from staging
+-- git restore --staged <file>
+
 resetting commits
+-- git reset --soft HEAD~n (n - number of latest commits to revert)
+-- git reset HEAD~n
+-- git reset --hard HEAD~n
+soft - just remove the files from commit and keep in staging and local repo
+no flag - remove the files from commit and staging, keep in local repo
+hard - to remove the files from everywhere
+
+ to push to remote
+ -- git push origin <branchname>
+
+ to check existing branches
+ -- git branch
+
+ to create a new branch
+ -- git branch <branchname>
+
+to switch / change branch
+-- git checkout <branchname>
+
+to merge the code of other branches to main
+-- git merge <branchname>
+
+to pull remote changes to local repo/branch
+-- git pull origin <branchname>
+
+to delete a branch
+-- git branch --delete <branchname>
+
+to clone a remote branch, default branch will be cloned ie. main
+-- git clone <url>
+
+--resetting commits
 
 --git reset --soft HEAD~1
 just remove the file from commit but keep on statging
