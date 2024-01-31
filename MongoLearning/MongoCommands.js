@@ -10,17 +10,17 @@
 // --use bajaj-demo
 
 // •	db is a pointer object of current database.
-// •	db.createCollection(‘’user) -to create collection 
+// •	db.createCollection("users") -to create collection 
 // •	to insert a document – db.collectionname.insert(document)
 // •	to view data in mongo db -db.collectionname.find() 
 // •	bulk insert -db.collectionName.insertMany([{},{},………])
 // •	to view data from collection -db.collectionName.find()
 // •	to view data from collection -db.collectionName.find({},{},…….)
-// •	to find data from collection with condition db.users.find({city:"Pune"},{name:1,city:1}) – 1 is tue 0 is false
+// •	to find data from collection with condition db.users.find({city:"Pune"},{name:1,city:1}) – 1 is tue 0 is false to show filds
 // •	to delete  document- db.collectionName.deleteOne({prop:value,….})
 // •	to delete multiple document- db.collectionName.deleteMany({prop:value,…..})
 // •	to drop collection -db.collectionName.drop()-
-// •	to show collection – show collection.
+// •	to show collection – show collections.
 
 
 
@@ -153,7 +153,6 @@ db.createCollection('users',{
 
 // normal grouping 
 db.users.aggregate([
-    
     {
      $group:{_id:"$city","count":{$sum:1}}
     }
