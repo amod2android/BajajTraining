@@ -637,3 +637,181 @@ db.user.insertMany(
             $unwind:"$employees"
         }
     ])
+
+
+    // filter Aggregation
+    db.users.aggregate([
+        {
+            $project:{
+                hobbies:{
+                    $filter:{
+                        input:"$hobbies",
+                        as:"hobby",
+                        cond:{$eq:["$$hobby","Singing"]}
+                    }
+                }
+            }
+        }
+    ])
+
+    db.users.aggregate([
+
+        {
+            $group:{_id:"$city","count":{$sum:1}}
+        }
+    ])
+
+    /// update value or object in array  inside the dicument
+    db.collectionName.updateOne({},{$push:{arrayName: newValue}})
+
+
+    db.users.updateOne({name:"John Doe"},{$push:{hobbies : "Painting"}})
+
+    db.users.updateMany({},{$push:{hobbies : "Hunting"}})
+
+    ///////////
+
+
+
+
+
+
+db.Students.insertMany(
+    [
+    {name: "Amod",age:27,city:"Pune",hobbies:["Singing","Reading"],courseId:[ObjectId('65b9e574c85da59ee5f8248d'),ObjectId('65b9e574c85da59ee5f8248e')]},
+    {name: "Promod",age:24,city:"Pune",hobbies:["Hunting","Reading"],courseId:[ObjectId('65b9e574c85da59ee5f8248e'),ObjectId('65b9e574c85da59ee5f8248f')]},
+    {name: "Vinod",age:30,city:"Pune",hobbies:["Singing","Playing"],courseId:[ObjectId('65b9e574c85da59ee5f8248f'),ObjectId('65b9e574c85da59ee5f8248f')]},
+    {name: "Nitu",age:32,city:"Nasik",hobbies:["Singing","Reading"],courseId:[ObjectId('65b9e574c85da59ee5f8248f')]},
+    {name: "Avinash",age:25,city:"Mumbai",hobbies:["Singing","Reading"],courseId:[ObjectId('65b9e574c85da59ee5f8248d')]},
+   
+    ]
+    )
+    
+    db.createCollection('Students',{
+        validator:{
+            $jsonSchema:{
+                bsonType:"object",
+                required:["name","city","hobbies","age","courseId"],
+                properties:{
+                    name:{
+                        bsonType:"string",
+                        description:"Name Field"
+                    },
+                    city:{
+                        bsonType:"string",
+                        description:"City Field",
+                    },
+                    hobbies:{
+                        bsonType:"array",
+                        description:"hobbies Field",
+                        minItems:1,
+                        maxItems:4,
+                        items:{
+                            bsonType:"string"
+                        }
+                    },
+                    age:{
+                        bsonType:"int",
+                        description:"Age Field",
+                        minimum :12,
+                        maximum:100
+                    },
+                    courseId:{
+                        bsonType:"array",
+                        description:"course Id",
+                        items:{
+                            bsonType:"objectId"
+                        }
+                     }
+                }
+            }
+        }
+    })
+
+
+
+
+    db.courses.insertMany(
+        [
+            {name:"Math",fees:34000,duration:10},
+            {name:"Science",fees:34000,duration:5},
+            {name:"English",fees:34000,duration:6},
+        ]
+        )
+
+    db.createCollection('courses',{
+        validator:{
+            $jsonSchema:{
+                bsonType:"object",
+                required:["name","fees","duration"],
+                properties:{
+                    name:{
+                        bsonType:"string",
+                        description:"Name Field"
+                    },
+                    fees:{
+                        bsonType:"int",
+                        description:"Age Field",
+                        minimum :0,
+                        maximum:100000
+                    },
+                    duration:{
+                        bsonType:"int",
+                        description:"duration",
+                     }
+                }
+            }
+        }
+    })
+
+
+
+    //1
+
+    db.Students.aggregate([
+        {
+            $lookup:{
+                from:"courses",
+                localField:"courseId",
+                foreignField:"_id",
+                as:"courses"
+                
+            }
+        }
+    ])
+         //2
+         db.Students.find({hobbies:"Playing"},{courseId:0})
+
+
+
+//3
+    db.Students.aggregate([
+    
+        {
+         $group:{_id:"$city","count":{$sum:1}}
+        }
+     ])
+
+
+     //4
+    db.courses.aggregate([
+        {
+            $lookup:{
+                from:"Students",
+                localField:"_id",
+                foreignField:"courseId",
+                as:"student"
+                
+            }
+        },
+        {
+            $project:{
+                "studentCount":{$size:"$student"},name:1
+                
+            }
+        }
+    
+    ])
+
+
+ 
