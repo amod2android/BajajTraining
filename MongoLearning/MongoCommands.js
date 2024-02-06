@@ -808,9 +808,13 @@ db.Students.insertMany(
                 "studentCount":{$size:"$student"},name:1
                 
             }
+        },
+        {
+            $unwind:"$department"
         }
     
     ])
 
 
  
+
