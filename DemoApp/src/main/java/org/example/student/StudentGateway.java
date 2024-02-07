@@ -72,13 +72,13 @@ public class StudentGateway {
     }
 
 
-    public void updateStudent(int id, String name) {
+    public int updateStudent(int id, String name) {
         String query = "update students set name=? where id=?";
         try {
             PreparedStatement preparedStatement=dbConnection.getConnection().prepareStatement(query);
             preparedStatement.setString(1, String.valueOf(name));
-            preparedStatement.setString(2, String.valueOf(id));
-            preparedStatement.executeUpdate();
+            preparedStatement.setInt(2, id);
+            return preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

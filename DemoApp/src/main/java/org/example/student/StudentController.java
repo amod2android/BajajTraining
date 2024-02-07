@@ -43,7 +43,11 @@ public class StudentController implements Controller{
         int srl=scanner.nextInt();
         String name=scanner.next();
         Student student=students.get(srl-1);
-        studentGateway.updateStudent(student.getId(),name);
+        if (studentGateway.updateStudent(student.getId(),name) == 1) {
+            System.out.println("Student "+name+" Updated");
+        } else {
+            System.out.println("Some problem");
+        }
     }
 
     @Override
