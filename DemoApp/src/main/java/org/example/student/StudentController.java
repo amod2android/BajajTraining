@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class StudentController implements Controller{
+public class StudentController implements Controller {
     Scanner scanner = new Scanner(System.in);
     StudentGateway studentGateway;
+
     public StudentController(StudentGateway studentGateway) {
         this.studentGateway = studentGateway;
     }
+
     @Override
     public void create() {
         System.out.println("enter name, age,rollno, city, subject, gender res");
@@ -31,20 +33,20 @@ public class StudentController implements Controller{
 
     @Override
     public void getAll() {
-        ArrayList<Student> students=studentGateway.get();
-       this.display(students);
+        ArrayList<Student> students = studentGateway.get();
+        this.display(students);
     }
 
     @Override
     public void update() {
-        ArrayList<Student> students=studentGateway.get();
+        ArrayList<Student> students = studentGateway.get();
         this.display(students);
         System.out.println("Enter srl no and Name you want to update");
-        int srl=scanner.nextInt();
-        String name=scanner.next();
-        Student student=students.get(srl-1);
-        if (studentGateway.updateStudent(student.getId(),name) == 1) {
-            System.out.println("Student "+name+" Updated");
+        int srl = scanner.nextInt();
+        String name = scanner.next();
+        Student student = students.get(srl - 1);
+        if (studentGateway.updateStudent(student.getId(), name) == 1) {
+            System.out.println("Student " + name + " Updated");
         } else {
             System.out.println("Some problem");
         }
@@ -53,27 +55,40 @@ public class StudentController implements Controller{
     @Override
     public void display(ArrayList<Student> students) {
         System.out.println(studentGateway.get());
-        AtomicInteger counter= new AtomicInteger(1);
+        AtomicInteger counter = new AtomicInteger(1);
         students.forEach(student -> {
-            System.out.println(counter+" "+student.getName()+" "+student.getRollNo()+" "+student.getCity());
+            System.out.println(counter + " " + student.getName() + " " + student.getRollNo() + " " + student.getCity());
             counter.getAndIncrement();
         });
     }
 
     @Override
     public void delete() {
-        ArrayList<Student> students=studentGateway.get();
+        ArrayList<Student> students = studentGateway.get();
         this.display(students);
         System.out.println("Choose Serial No To delete");
-        int srl=scanner.nextInt();
-        Student student=students.get(srl-1);
+        int srl = scanner.nextInt();
+        Student student = students.get(srl - 1);
 
-        if(studentGateway.delete(student.getId())==1)
-        {
+        if (studentGateway.delete(student.getId()) == 1) {
             System.out.println("Student Deleted");
-        }
-        else {
+        } else {
             System.out.println("Some Problem");
         }
+    }
+
+    @Override
+    public void searchByName() {
+
+        ArrayList<Student> students;
+        System.out.println("Enter Name");
+        String enteredName = scanner.next();
+        students=studentGateway.searchByName(enteredName);
+        if (!students.isEmpty()) {
+            System.out.println(students);
+        } else {
+            System.out.println("Record Not available...");
+        }
+
     }
 }

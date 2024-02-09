@@ -75,13 +75,42 @@ public class StudentGateway {
     public int updateStudent(int id, String name) {
         String query = "update students set name=? where id=?";
         try {
-            PreparedStatement preparedStatement=dbConnection.getConnection().prepareStatement(query);
+            PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(query);
             preparedStatement.setString(1, String.valueOf(name));
             preparedStatement.setInt(2, id);
             return preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+    }
+
+    public ArrayList<Student> searchByName(String name) {
+        String query= "select * from students where name like '%?%'" ;
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(query);
+            preparedStatement.setString(1,name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+
+                    Student student = new Student();
+                    student.setId(resultSet.getInt("id"));
+                    student.setName(resultSet.getString("name"));
+                    student.setAge(resultSet.getInt("age"));
+                    student.setRollNo(resultSet.getInt("rollno"));
+                    student.setCity(resultSet.getString("city"));
+                    student.setSubject(resultSet.getString("subject"));
+                    student.setGender(resultSet.getString("gender"));
+                    students.add(student);
+                }
+                return students;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
 
     }
 }

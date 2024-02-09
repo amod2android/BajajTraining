@@ -34,12 +34,16 @@ public class Main {
                     studentController.delete();
                     break;
                 }
-                case 3:{
+                case 3: {
                     studentController.update();
                     break;
                 }
-                case 4:{
+                case 4: {
                     studentController.getAll();
+                    break;
+                }
+                case 5: {
+                    studentController.searchByName();
                     break;
                 }
                 default: {

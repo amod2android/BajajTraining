@@ -1,9 +1,10 @@
 package org.bajajpro;
 
-public class Rectangle extends Shape{
+public class Rectangle implements Shape{
 
     private int  height;
     private int  width;
+    private double area;
 
     public Rectangle(int height,int width) {
         this.height=height;
@@ -12,22 +13,13 @@ public class Rectangle extends Shape{
 
     @Override
     public void displayInfo() {
-        super.displayInfo();
-        System.out.println(toString());
+        System.out.println("Height of Rectangle is = "+height);
+        System.out.println("Width of Rectangle is = "+width);
+        System.out.println("Area of Rectangle is = "+area);
     }
 
     @Override
     public void area() {
-        super.area();
-        int area= height*width;
-        System.out.println("Area of Rectangle is = "+area);
-
-    }
-
-    @Override
-    public String toString() {
-        return "Rectangle \n" +
-                "height=" + height +
-                ", \nwidth=" + width;
+         area= height*width;
     }
 }
