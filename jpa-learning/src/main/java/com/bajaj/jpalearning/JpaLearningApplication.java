@@ -1,5 +1,6 @@
 package com.bajaj.jpalearning;
 
+import com.bajaj.jpalearning.models.Address;
 import com.bajaj.jpalearning.models.Customer;
 import com.bajaj.jpalearning.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
 //@RestController
 public class JpaLearningApplication /*implements CommandLineRunner*/ {
+
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
 
 
@@ -30,11 +36,19 @@ public class JpaLearningApplication /*implements CommandLineRunner*/ {
 
 
     //Not recommended
-/*    @Override
-    public void run(String... args) throws Exception {
+//    @Override
+//    public void run(String... args) throws Exception {
 
         //To insert record
 //        Customer customer = new Customer("Amod", 33, "amod@gmail.com", "amod");
+//        Address address1=new Address(100,"kothia","Samastipur",848122);
+//        Address address2=new Address(101,"kothia Bajar","Samastipur",848122);
+//        address1.setCustomer(customer);
+//        address2.setCustomer(customer);
+//        List<Address>addr=new ArrayList<>();
+//        addr.add(address1);
+//        addr.add(address2);
+//        customer.setAddresses(addr);
 //        Customer customer2 = new Customer("Pramod", 40, "pramod@gmail.com", "pramod");
 //        Customer customer3 = new Customer("Vinod", 35, "vinod@gmail.com", "vinod");
 //        customerRepository.save(customer);
@@ -104,5 +118,5 @@ public class JpaLearningApplication /*implements CommandLineRunner*/ {
         // delete
 //        customerRepository.deleteById(1L);
 
-    }*/
+//    }
 }

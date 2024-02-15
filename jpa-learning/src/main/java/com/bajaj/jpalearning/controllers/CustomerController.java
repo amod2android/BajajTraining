@@ -1,39 +1,35 @@
 package com.bajaj.jpalearning.controllers;
 
+import com.bajaj.jpalearning.beens.ResponseHandler;
 import com.bajaj.jpalearning.models.Customer;
-import com.bajaj.jpalearning.repositories.CustomerRepository;
+import com.bajaj.jpalearning.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-import java.util.Optional;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/v1/customers")
 public class CustomerController {
 
     @Autowired
-    CustomerRepository customerRepository;
-    @GetMapping("/customers")
-    public List<Customer> getCustomers(){
-        return customerRepository.findAll();
+    CustomerService customerService;
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAll() {
+        return ResponseHandler.createResponse("Found Customer", HttpStatus.OK, customerService.getAll());
     }
 
-    @GetMapping("/customers/{id}")
-    public Object getCustomer(@PathVariable Long id){
-        Optional<Customer> customer = customerRepository.findById(id);
-        if (customer.isPresent()){
-            return customer.get();
-        }else {
-            return "Student not Found";
-        }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> get(@PathVariable Long id) {
+        Customer customer = customerService.get(id);
+        return ResponseHandler.createResponse("Found", HttpStatus.OK, customerService.get(id));
     }
 
-    @DeleteMapping("/customers/{id}")
-    public String deleteCustomer(@PathVariable Long id){
-        customerRepository.deleteById(id);
-        return "Customer Deleted";
+
+    @PostMapping("/")
+    public ResponseEntity<Object> create(@RequestBody Customer customer) {
+        Customer createCustomer = customerService.create(customer);
+        return ResponseHandler.createResponse("Created", HttpStatus.CREATED, createCustomer);
     }
 }
