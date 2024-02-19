@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/1/products")
+@RequestMapping("/api/v1/products")
 public class ProductController {
 
     @Autowired
@@ -19,7 +19,7 @@ public class ProductController {
 
     @GetMapping("/all")
     public ResponseEntity<?> getAll() {
-        return ResponseHandler.createResponse("Found Customer", HttpStatus.OK, productService.getAll());
+        return ResponseHandler.createResponse("Found Products", HttpStatus.OK, productService.getAll());
     }
 
     @GetMapping("/{id}")
@@ -34,7 +34,7 @@ public class ProductController {
         if (createProduct != null) {
             return ResponseHandler.createResponse("Created", HttpStatus.CREATED, createProduct);
         }
-        return ResponseHandler.createResponse("Customer Already Exist", HttpStatus.CONFLICT, null);
+        return ResponseHandler.createResponse("Products Already Exist", HttpStatus.CONFLICT, null);
 
     }
 }

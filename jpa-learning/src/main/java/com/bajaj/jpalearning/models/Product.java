@@ -1,5 +1,7 @@
 package com.bajaj.jpalearning.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -23,6 +25,7 @@ public class Product {
     private String code;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<CartItem> carts;
 
     @CreationTimestamp()
@@ -32,21 +35,6 @@ public class Product {
     private LocalDateTime updateAt;
 
     public Product() {
-    }
-
-    public Product(String name, Double price, String imageUrl, String code) {
-        this.name = name;
-        this.price = price;
-        this.imageUrl = imageUrl;
-        this.code = code;
-    }
-
-    public Product(String name, Double price, String imageUrl, String code, List<CartItem> carts) {
-        this.name = name;
-        this.price = price;
-        this.imageUrl = imageUrl;
-        this.code = code;
-        this.carts = carts;
     }
 
     public Product(Long id, String name, Double price, String imageUrl, String code, List<CartItem> carts, LocalDateTime createdAt, LocalDateTime updateAt) {
@@ -99,6 +87,7 @@ public class Product {
     public void setCode(String code) {
         this.code = code;
     }
+
 
     public List<CartItem> getCarts() {
         return carts;

@@ -1,6 +1,5 @@
 package com.bajaj.jpalearning.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -16,11 +15,11 @@ public class CartItem {
 
     @ManyToOne
     private Product product;
-    
+
     @ManyToOne
     private Customer customer;
 
-    private  int quantity;
+    private int quantity;
 
     @CreationTimestamp()
     private LocalDateTime createdAt;
@@ -29,12 +28,6 @@ public class CartItem {
     private LocalDateTime updateAt;
 
     public CartItem() {
-    }
-
-    public CartItem(Product product, Customer customer, int quantity) {
-        this.product = product;
-        this.customer = customer;
-        this.quantity = quantity;
     }
 
     public CartItem(Long id, Product product, Customer customer, int quantity, LocalDateTime createdAt, LocalDateTime updateAt) {
