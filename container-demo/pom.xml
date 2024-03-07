@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.2</version>
+		<version>3.2.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.bajaj</groupId>
-	<artifactId>jpa-learning</artifactId>
+	<groupId>com.example</groupId>
+	<artifactId>container-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>jpa-learning</name>
+	<name>container-demo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>21</java.version>
@@ -45,7 +45,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>bajajmall</finalName>
-		</build>
+		<finalName>bajaj-docker</finalName>
+	</build>
 
 </project>

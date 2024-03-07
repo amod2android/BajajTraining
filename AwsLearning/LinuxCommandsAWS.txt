@@ -1,0 +1,16 @@
+--To Build A JAr
+ mvn clean install
+
+ --To run a JAr
+java -jar jar-path
+
+--to install any software/binary in linux
+sudo apt update [optional] a good convention
+
+--to install in linux
+sudo apt install jdk jdk-name   [openjdk-21-jdk-headless]
+
+
+-- to download a file from s3 in linux
+wget s3-file-url
+

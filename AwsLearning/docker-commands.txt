@@ -1,0 +1,60 @@
+-- to run the image 
+docker run hello-world 
+
+--to show docker images
+docker images
+
+--to run the image with spacific name
+docker run --name first-container hello-world
+
+-- to see running container
+ps
+-- to see all containers
+ps -a
+
+-- to remove docker
+--docker rm dockername/Id
+docker rm hello-world
+
+-- to remove images
+--docker rmi imagename
+
+
+docker inspect mysql
+
+docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=password mysql
+docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=password -d  mysql
+docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=password -d -p 8080:3306 mysql
+docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=password -d -P mysql
+
+ docker stop mysql1
+
+-- to see logs 
+ docker logs mysql1
+
+-- to see container details
+docker inspect containername
+docker inspect postgres-c-v1
+
+
+-- to 
+docker exec -it postgres-c-v1 ls /
+
+-- to itract 
+ docker exec -it postgres-c-v1 /bin/bash
+
+
+-- to strat container 
+docker start container-name/id
+
+-- to stop a container
+docker stop container-name
+
+-- to start a serviceless container in itractive mode
+docker run -it --name container imafge[/bin/bash]
+
+-- to start a serviceless container in it mode
+docker start -i container/id
+
+-- to build your own image 
+docker build -t image-name:[version] docker-file-path

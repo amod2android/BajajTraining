@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    container_name: db-container-v2
+    environment:
+      POSTGRES_USER: amod
+      POSTGRES_PASSWORD: amod
+      POSTGRES_DB: pms
+    ports:
+      - "5433:5432"
+    volumes:
+    - /Users/amodkumar/Desktop/docker-bajaj-data:/home/data
+  app:
+    build: .
+    image: web-app-v2
+    container_name: web-app-count
+    ports:
+      - "8081:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/pms
+      SPRING_DATASOURCE_USERNAME: amod
+      SPRING_DATASOURCE_PASSWORD: amod
+    depends_on:
+      - db

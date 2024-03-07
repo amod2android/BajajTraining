@@ -1,0 +1,24 @@
+--to print home working directory
+pwd
+
+-- root derectory and root user are 2 different thing
+
+-- to go to root directory
+cd /
+
+--to go forword directory
+cd directoryname/dname/dname/....
+
+-- to go back
+cd ..
+
+--to go root directory
+cd ~
+
+-- to delete a directoryname
+rmdir
+
+--to switch to root user
+sudo su
+
+--to 
