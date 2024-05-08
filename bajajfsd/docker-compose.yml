@@ -1,0 +1,25 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: bajajfsd-db
+      POSTGRES_USER: bajajfsd
+      POSTGRES_PASSWORD: bajajfsd
+    ports:
+      - "5433:5432"
+
+  spring-boot-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bajajfsd-cout
+    depends_on:
+      - postgres
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/bajajfsd-db
+      SPRING_DATASOURCE_USERNAME: bajajfsd
+      SPRING_DATASOURCE_PASSWORD: bajajfsd
